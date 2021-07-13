@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>
+    Brain Tumour Detection
+  </title>
+</head>
+<body>
+
+  {% if error %}
+    <h3>Error!</h3>
+    <p>{{ error }}</p>
+  {% endif %}
+
+  <h1>Upload your file!</h1>
+  <form method="POST" enctype="multipart/form-data">
+    <input type="file" name="files" multiple>
+    <br><br>
+    <button type="submit">Upload</button>
+  </form>
+
+  <h1>Choose from a sample!</h1>
+  <form method="POST" enctype="multipart/form-data">
+    <input type="checkbox" value="1" name="Y1" id="Y1">
+    <label for="Y1"> Sample 1 </label><br>
+    <input type="checkbox" value="2" name="Y2" id="Y2">
+    <label for="Y2"> Sample 2 </label><br>
+    <input type="checkbox" value="3" name="Y3" id="Y3">
+    <label for="Y3"> Sample 3 </label><br>
+    <input type="checkbox" value="4" name="Y4" id="Y4">
+    <label for="Y4"> Sample 4 </label><br>
+    <input type="checkbox" value="6" name="Y6" id="Y6">
+    <label for="Y6"> Sample 5 </label><br>
+    <input type="checkbox" value="7" name="Y7" id="Y7">
+    <label for="Y7"> Sample 6 </label><br>
+    <input type="checkbox" value="8" name="Y8" id="Y8">
+    <label for="Y8"> Sample 7 </label><br>
+    <input type="checkbox" value="9" name="Y9" id="Y9"> 
+    <label for="Y9"> Sample 8 </label><br><br>
+
+    <button type="submit">Upload</button>
+  </form>
+
+  <h1>Results</h1>
+  {% if results %}
+    {% if results['data']|length > 1 %}
+	<h3>Files are placed in the same order which you selected them</h3>
+	<p>If you chose the samples then it will be in numerical order.</p>
+    {% endif %}
+
+    {% for file in results['files'] %}
+      <img src="data:image/png;base64, {{ results['files'][file] }}" alt="Brain Scan" />
+    {% endfor %}
+
+  {% else %}
+    <h4>You have not yet submitted any images</h4>
+  {% endif %}
+
+</body>
+</html>
